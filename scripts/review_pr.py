@@ -6,8 +6,8 @@ import openai
 repo = os.environ.get("GITHUB_REPOSITORY")
 pr_number = os.environ.get("GITHUB_REF", "").split("/")[-1]
 
-gh_token = os.environ["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"]
-openai.api_key = os.environ["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"]
+gh_token = os.environ["GH_TOKEN"]
+openai.api_key = os.environ["OPEN_API_KEY"]
 
 headers = {
     "Authorization": f"token {gh_token}",
