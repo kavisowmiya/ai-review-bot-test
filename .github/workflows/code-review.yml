@@ -7,6 +7,7 @@ on:
 jobs:
   review:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -15,8 +16,19 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install deps
+      - name: Install dependencies
         run: pip install requests openai
+
+      - name: Debug: Check if OPEN_API_KEY is set
+        run: |
+          if [ -z "$OPEN_API_KEY" ]; then
+            echo "❌ OPEN_API_KEY is NOT set"
+            exit 1
+          else
+            echo "✅ OPEN_API_KEY is set"
+          fi
+        env:
+          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
 
       - name: Run AI code review
         env:
